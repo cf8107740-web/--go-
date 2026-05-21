@@ -1,0 +1,27 @@
+syntax = "proto3";
+package pb;
+
+option go_package = "cache/pb"; 
+//请求
+message Request {
+  string group = 1;
+  string key = 2;
+  bytes value = 3;
+}
+//Get回复
+message ResponseForGet {
+  bytes value = 1;
+}
+//delete回复
+message ResponseForDelete {
+  bool value = 1;
+}
+//定义服务
+service KamaCache {
+//get
+  rpc Get(Request) returns (ResponseForGet);
+//set
+  rpc Set(Request) returns (ResponseForGet);
+  //delete
+  rpc Delete(Request) returns(ResponseForDelete);
+}
